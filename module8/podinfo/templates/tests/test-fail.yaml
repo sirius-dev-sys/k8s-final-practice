@@ -1,0 +1,23 @@
+{{- if and .Values.tests.enabled .Values.service.enabled .Values.tests.fail.enabled }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "podinfo.fullname" . }}-test-fail
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "podinfo.auxLabels" . | nindent 4 }}
+    app.kubernetes.io/component: test
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  restartPolicy: Never
+  containers:
+    - name: curl
+      image: "{{ .Values.tests.image.repository }}:{{ .Values.tests.image.tag }}"
+      command: ["sh", "-c"]
+      args:
+        - >-
+          curl -fsS --max-time {{ .Values.tests.timeoutSeconds }}
+          http://{{ include "podinfo.fullname" . }}:{{ .Values.service.port }}/status/500
+{{- end }}

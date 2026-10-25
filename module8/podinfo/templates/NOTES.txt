@@ -1,0 +1,11 @@
+Release {{ .Release.Name }} installed in namespace {{ .Release.Namespace }}.
+{{- if .Values.service.enabled }}
+
+Check:
+  kubectl -n {{ .Release.Namespace }} port-forward svc/{{ include "podinfo.fullname" . }} 8080:{{ .Values.service.port }}
+  curl localhost:8080
+{{- end }}
+{{- if .Values.redis.enabled }}
+
+Cache: --cache-server=tcp://{{ include "podinfo.redis.fullname" . }}:{{ .Values.redis.port }}
+{{- end }}
