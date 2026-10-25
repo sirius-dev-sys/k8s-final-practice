@@ -1,0 +1,27 @@
+{{- if and .Values.tests.enabled .Values.service.enabled .Values.redis.enabled }}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{ include "podinfo.fullname" . }}-test-cache
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "podinfo.auxLabels" . | nindent 4 }}
+    app.kubernetes.io/component: test
+  annotations:
+    "helm.sh/hook": test
+    "helm.sh/hook-delete-policy": before-hook-creation
+spec:
+  restartPolicy: Never
+  containers:
+    - name: curl
+      image: "{{ .Values.tests.image.repository }}:{{ .Values.tests.image.tag }}"
+      command: ["sh", "-c"]
+      args:
+        - |
+          set -e
+          URL=http://{{ include "podinfo.fullname" . }}:{{ .Values.service.port }}
+          curl -fsS --max-time {{ .Values.tests.timeoutSeconds }} -X POST -d 'helm-test-value' "$URL/cache/helm-test"
+          echo
+          curl -fsS --max-time {{ .Values.tests.timeoutSeconds }} "$URL/cache/helm-test" | grep -q 'helm-test-value'
+          echo "cache OK"
+{{- end }}

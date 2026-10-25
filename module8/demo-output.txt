@@ -1,0 +1,250 @@
+
+########## lint + template
+==> Linting ./podinfo
+[INFO] Chart.yaml: icon is recommended
+
+1 chart(s) linted, 0 chart(s) failed
+==> Linting ./podinfo
+[INFO] Chart.yaml: icon is recommended
+
+1 chart(s) linted, 0 chart(s) failed
+template dev OK
+template prod OK
+
+########## metrics-server (нужен для HPA)
+serviceaccount/metrics-server created
+clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
+clusterrole.rbac.authorization.k8s.io/system:metrics-server created
+rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created
+clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
+clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server created
+service/metrics-server created
+deployment.apps/metrics-server created
+apiservice.apiregistration.k8s.io/v1beta1.metrics.k8s.io created
+deployment.apps/metrics-server patched
+
+########## dev: install (redis включен, хуки включены)
+E1025 17:34:19.806465    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:19.812214    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:19.849916    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:19.855452    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:19.881823    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:19.887178    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:19.894048    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:19.898476    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:19.920348    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:19.921146    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:19.927617    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:19.932432    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:19.972773    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:19.978676    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:20.003554    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:20.006273    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:20.032133    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:20.034850    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:34.460035    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:34.465294    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:50.516835    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:50.517868    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:50.534411    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:50.540326    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:53.594321    2973 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:53.599663    2973 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+NAME: podinfo
+LAST DEPLOYED: Sun Oct 25 17:34:19 2026
+NAMESPACE: podinfo
+STATUS: deployed
+REVISION: 1
+NOTES:
+Release podinfo installed in namespace podinfo.
+
+Check:
+  kubectl -n podinfo port-forward svc/podinfo 8080:9898
+  curl localhost:8080
+
+Cache: --cache-server=tcp://podinfo-redis:6379
+NAME   	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART        	APP VERSION
+podinfo	podinfo  	1       	2026-10-25 17:34:19.813558049 +0300 MSK	deployed	podinfo-0.1.0	6.7.1      
+NAME                            READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/podinfo         1/1     1            1           19s
+deployment.apps/podinfo-redis   1/1     1            1           19s
+
+NAME                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/podinfo         ClusterIP   10.96.173.232   <none>        9898/TCP   19s
+service/podinfo-redis   ClusterIP   10.96.76.177    <none>        6379/TCP   19s
+
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      34s
+configmap/podinfo-redis      1      19s
+
+NAME                                READY   STATUS    RESTARTS   AGE
+pod/podinfo-66c5954f6d-2qq96        1/1     Running   0          19s
+pod/podinfo-redis-67947447f-7fsjh   1/1     Running   0          19s
+
+########## dev: helm test (http + cache)
+E1025 17:34:53.916513    4113 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:53.917465    4113 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+E1025 17:34:53.955984    4113 memcache.go:403] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" groupVersion="metrics.k8s.io/v1beta1"
+E1025 17:34:53.961547    4113 memcache.go:133] "Couldn't get resource list" err="the server is currently unable to handle the request" logger="UnhandledError" gv="metrics.k8s.io/v1beta1"
+NAME: podinfo
+LAST DEPLOYED: Sun Oct 25 17:34:19 2026
+NAMESPACE: podinfo
+STATUS: deployed
+REVISION: 1
+TEST SUITE:     podinfo-test-cache
+Last Started:   Sun Oct 25 17:34:53 2026
+Last Completed: Sun Oct 25 17:34:59 2026
+Phase:          Succeeded
+TEST SUITE:     podinfo-test-http
+Last Started:   Sun Oct 25 17:34:59 2026
+Last Completed: Sun Oct 25 17:35:02 2026
+Phase:          Succeeded
+NOTES:
+Release podinfo installed in namespace podinfo.
+
+Check:
+  kubectl -n podinfo port-forward svc/podinfo 8080:9898
+  curl localhost:8080
+
+Cache: --cache-server=tcp://podinfo-redis:6379
+
+########## dev: upgrade - отключаем Redis (без uninstall)
+Release "podinfo" has been upgraded. Happy Helming!
+NAME: podinfo
+LAST DEPLOYED: Sun Oct 25 17:35:02 2026
+NAMESPACE: podinfo
+STATUS: deployed
+REVISION: 2
+NOTES:
+Release podinfo installed in namespace podinfo.
+
+Check:
+  kubectl -n podinfo port-forward svc/podinfo 8080:9898
+  curl localhost:8080
+REVISION	UPDATED                 	STATUS    	CHART        	APP VERSION	DESCRIPTION     
+1       	Sun Oct 25 17:34:19 2026	superseded	podinfo-0.1.0	6.7.1      	Install complete
+2       	Sun Oct 25 17:35:02 2026	deployed  	podinfo-0.1.0	6.7.1      	Upgrade complete
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/podinfo   1/1     1            1           41s
+
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/podinfo   ClusterIP   10.96.173.232   <none>        9898/TCP   41s
+
+NAME                         DATA   AGE
+configmap/kube-root-ca.crt   1      56s
+
+NAME                           READY   STATUS      RESTARTS   AGE
+pod/podinfo-7df8b9758d-xgbhj   1/1     Running     0          10s
+pod/podinfo-test-cache         0/1     Completed   0          22s
+pod/podinfo-test-http          0/1     Completed   0          16s
+redis ресурсов осталось: 0
+{
+  "status": "OK"
+}
+
+########## negative + timeout тесты (ожидаемо падают)
+Error: unknown flag: --set
+>>> FAIL-сценарий упал, как и задумано
+Error: unknown flag: --set
+>>> TIMEOUT-сценарий завис, как и задумано
+pod "podinfo-test-cache" deleted
+pod "podinfo-test-http" deleted
+
+########## prod: install через values-prod.yaml
+NAME: podinfo-prod
+LAST DEPLOYED: Sun Oct 25 17:35:18 2026
+NAMESPACE: podinfo
+STATUS: deployed
+REVISION: 1
+NOTES:
+Release podinfo-prod installed in namespace podinfo.
+
+Check:
+  kubectl -n podinfo port-forward svc/podinfo-prod 8080:9898
+  curl localhost:8080
+
+Cache: --cache-server=tcp://podinfo-prod-redis:6379
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/podinfo              1/1     1            1           50s
+deployment.apps/podinfo-prod         1/1     1            1           6s
+deployment.apps/podinfo-prod-redis   1/1     1            1           6s
+
+NAME                                               REFERENCE                 TARGETS                        MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/podinfo-prod   Deployment/podinfo-prod   <unknown>/70%, <unknown>/80%   3         6         0          6s
+
+NAME                                      MIN AVAILABLE   MAX UNAVAILABLE   ALLOWED DISRUPTIONS   AGE
+poddisruptionbudget.policy/podinfo-prod   2               N/A               0                     6s
+
+NAME                                     CLASS   HOSTS                ADDRESS   PORTS   AGE
+ingress.networking.k8s.io/podinfo-prod   nginx   podinfo.prod.local             80      6s
+
+NAME                         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/podinfo              ClusterIP   10.96.173.232   <none>        9898/TCP   50s
+service/podinfo-prod         ClusterIP   10.96.27.115    <none>        9898/TCP   6s
+service/podinfo-prod-redis   ClusterIP   10.96.70.158    <none>        6379/TCP   6s
+{"level":"info","ts":"2026-10-25T14:35:19.388Z","caller":"podinfo/main.go:153","msg":"Starting podinfo","version":"6.7.1","revision":"6b7aab8a10d6ee8b895b0a5048f4ab0966ed29ff","port":"9898"}
+{"level":"info","ts":"2026-10-25T14:35:19.389Z","caller":"http/server.go:224","msg":"Starting HTTP Server.","addr":":9898"}
+{"level":"warn","ts":"2026-10-25T14:35:19.390Z","caller":"http/cache.go:162","msg":"cache server is offline","error":"dial tcp 10.96.70.158:6379: connect: connection refused","server":"tcp://podinfo-prod-redis:6379"}
+NAME: podinfo-prod
+LAST DEPLOYED: Sun Oct 25 17:35:18 2026
+NAMESPACE: podinfo
+STATUS: deployed
+REVISION: 1
+TEST SUITE:     podinfo-prod-test-cache
+Last Started:   Sun Oct 25 17:35:25 2026
+Last Completed: Sun Oct 25 17:35:26 2026
+Phase:          Succeeded
+TEST SUITE:     podinfo-prod-test-http
+Last Started:   Sun Oct 25 17:35:26 2026
+Last Completed: Sun Oct 25 17:35:28 2026
+Phase:          Succeeded
+NOTES:
+Release podinfo-prod installed in namespace podinfo.
+
+Check:
+  kubectl -n podinfo port-forward svc/podinfo-prod 8080:9898
+  curl localhost:8080
+
+Cache: --cache-server=tcp://podinfo-prod-redis:6379
+
+########## ИТОГ для README
+NAME        	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART        	APP VERSION
+podinfo     	podinfo  	2       	2026-10-25 17:35:02.961287802 +0300 MSK	deployed	podinfo-0.1.0	6.7.1      
+podinfo-prod	podinfo  	1       	2026-10-25 17:35:18.627494685 +0300 MSK	deployed	podinfo-0.1.0	6.7.1      
+--- helm get values podinfo
+USER-SUPPLIED VALUES:
+hooks:
+  enabled: true
+redis:
+  enabled: false
+--- helm get values podinfo-prod
+USER-SUPPLIED VALUES:
+hpa:
+  cpuUtilization: 70
+  enabled: true
+  maxReplicas: 6
+  memoryUtilization: 80
+  minReplicas: 3
+ingress:
+  className: nginx
+  enabled: true
+  host: podinfo.prod.local
+pdb:
+  enabled: true
+  minAvailable: 2
+redis:
+  enabled: true
+  resources:
+    limits:
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
+replicaCount: 3
+resources:
+  limits:
+    cpu: 500m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi

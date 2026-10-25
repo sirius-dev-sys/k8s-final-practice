@@ -1,0 +1,114 @@
+# ---- Naming ----
+nameOverride: ""
+fullnameOverride: ""
+
+# ---- Application ----
+# Ignored when hpa.enabled=true (HPA owns the replica count).
+replicaCount: 1
+
+image:
+  repository: ghcr.io/stefanprodan/podinfo
+  tag: ""            # empty -> Chart.appVersion
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []  # e.g. [{name: regcred}]
+
+serviceAccount:
+  create: false
+  name: ""
+  annotations: {}
+
+podAnnotations: {}
+podSecurityContext: {}
+securityContext: {}
+resources: {}         # HPA utilization targets need resources.requests
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 0
+    maxSurge: 1
+
+app:
+  port: 9898
+  grpcPort: null      # set a number to enable the gRPC port (container + Service)
+  extraArgs: []       # extra podinfo flags, e.g. ["--level=debug"]
+  extraEnv: []        # [{name: PODINFO_UI_COLOR, value: "#34577c"}]
+
+# ---- Service ----
+service:
+  enabled: true
+  type: ClusterIP
+  port: 9898
+  nodePort: null      # used only for type NodePort
+  annotations: {}
+
+# ---- Ingress ----
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  host: podinfo.local
+  path: /
+  pathType: Prefix
+  tls: []             # [{secretName: podinfo-tls, hosts: [podinfo.local]}]
+
+# ---- HPA ----
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  cpuUtilization: 80       # percent, null to disable the metric
+  memoryUtilization: null  # percent, null to disable the metric
+
+# ---- PodDisruptionBudget ----
+# maxUnavailable has priority if set; otherwise minAvailable is used.
+pdb:
+  enabled: false
+  minAvailable: 1
+  maxUnavailable: null
+
+# ---- Internal Redis (part of the chart, no dependency) ----
+redis:
+  enabled: false
+  image:
+    repository: redis
+    tag: 7.2-alpine
+    pullPolicy: IfNotPresent
+  port: 6379
+  resources: {}
+  config: |
+    maxmemory 64mb
+    maxmemory-policy allkeys-lru
+
+# ---- Helm hooks ----
+hooks:
+  enabled: false
+  image:
+    repository: busybox
+    tag: "1.36"
+  deletePolicy: before-hook-creation,hook-succeeded
+  events:            # which hooks to create
+    - pre-install
+    - post-install
+    - pre-upgrade
+    - post-upgrade
+    - pre-delete
+    - post-delete
+    - pre-rollback
+    - post-rollback
+
+# ---- Helm tests (helm test <release>) ----
+tests:
+  enabled: true
+  image:
+    repository: curlimages/curl
+    tag: 8.6.0
+  timeoutSeconds: 5   # curl --max-time
+  fail:
+    enabled: false    # negative scenario: pod exits 1 on purpose
+  timeout:
+    enabled: false    # timeout scenario: pod hangs (use helm test --timeout 30s)

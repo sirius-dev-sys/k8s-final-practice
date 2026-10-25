@@ -1,0 +1,29 @@
+{{- if .Values.hooks.enabled }}
+{{- range $event := .Values.hooks.events }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ printf "%s-%s" (include "podinfo.fullname" $) $event | trunc 63 | trimSuffix "-" }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "podinfo.auxLabels" $ | nindent 4 }}
+    app.kubernetes.io/component: hook
+  annotations:
+    "helm.sh/hook": {{ $event }}
+    "helm.sh/hook-delete-policy": {{ $.Values.hooks.deletePolicy | quote }}
+spec:
+  backoffLimit: 0
+  template:
+    metadata:
+      labels:
+        {{- include "podinfo.auxLabels" $ | nindent 8 }}
+        app.kubernetes.io/component: hook
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: hook
+          image: "{{ $.Values.hooks.image.repository }}:{{ $.Values.hooks.image.tag }}"
+          command: ["sh", "-c", "echo 'helm hook {{ $event }} for release {{ $.Release.Name }} (revision {{ $.Release.Revision }})'"]
+{{- end }}
+{{- end }}

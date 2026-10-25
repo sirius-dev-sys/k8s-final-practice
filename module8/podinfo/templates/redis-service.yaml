@@ -1,0 +1,18 @@
+{{- if .Values.redis.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "podinfo.redis.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "podinfo.redis.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "podinfo.redis.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: redis
+      port: {{ .Values.redis.port }}
+      targetPort: redis
+      protocol: TCP
+{{- end }}

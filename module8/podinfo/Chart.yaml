@@ -1,0 +1,6 @@
+apiVersion: v2
+name: podinfo
+description: Production-ready Helm chart for podinfo with optional internal Redis cache
+type: application
+version: 0.1.0
+appVersion: "6.7.1"
